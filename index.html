@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Fasting Period Calculator</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -12,17 +12,14 @@
       max-width: 600px;
       margin: 0 auto;
     }
-
     h1 {
       text-align: center;
       margin-bottom: 30px;
     }
-
     label {
       display: block;
       margin-top: 15px;
     }
-
     input, select {
       font-size: 1rem;
       padding: 8px;
@@ -30,7 +27,6 @@
       margin-top: 5px;
       box-sizing: border-box;
     }
-
     button {
       margin-top: 20px;
       padding: 10px;
@@ -38,7 +34,6 @@
       width: 100%;
       cursor: pointer;
     }
-
     #result {
       margin-top: 25px;
       font-size: 1.2rem;
@@ -50,22 +45,22 @@
 <body>
   <h1>Calculate My Fasting Period</h1>
 
-  <label for="lastMeal">Last Meal Time:</label>
-  <input type="time" id="lastMeal">
+  <label for="lastMeal">Last Meal Time (12-hour format):</label>
+  <input type="time" id="lastMeal" />
   <select id="lastMealPeriod">
     <option value="AM">AM</option>
     <option value="PM">PM</option>
   </select>
 
-  <label for="firstMeal">First Meal Time:</label>
-  <input type="time" id="firstMeal">
+  <label for="firstMeal">First Meal Time (12-hour format):</label>
+  <input type="time" id="firstMeal" />
   <select id="firstMealPeriod">
     <option value="AM">AM</option>
     <option value="PM">PM</option>
   </select>
 
   <label for="days">Days Between Meals:</label>
-  <input type="number" id="days" min="0" value="0">
+  <input type="number" id="days" min="0" value="0" />
 
   <button onclick="calculateFast()">Calculate Fasting Time</button>
 
@@ -98,6 +93,10 @@
       let firstTotal = first.hours * 60 + first.minutes + days * 1440;
 
       let diff = firstTotal - lastTotal;
+      if (diff < 0) {
+        document.getElementById("result").innerText = "First meal time must be after last meal time (including days).";
+        return;
+      }
       let hrs = Math.floor(diff / 60);
       let mins = diff % 60;
 
